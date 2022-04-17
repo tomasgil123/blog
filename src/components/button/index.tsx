@@ -7,6 +7,8 @@ export const ContainerButton = styled.button`
   color: ${colors.text.primary};
   font-weight: 600;
   cursor: pointer;
+  position: relative;
+  z-index: 100;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, ${colors.base.deepSkyBlue} 50%);
 `
 
