@@ -28,7 +28,7 @@ const PostContainer = styled.div`
     font-weight: 700;
   }
   h3 {
-    font-size: ${space.s5};
+    font-size: ${space.s6};
     color: ${colors.text.primary};
     margin-top: ${space.s8};
     font-weight: 700;
@@ -40,7 +40,7 @@ const PostContainer = styled.div`
   li {
     line-height: 28px;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 300;
     color: ${colors.text.primary};
     @media (min-width: ${breakpoints.lg}) {
       font-size: 21px;
@@ -53,6 +53,14 @@ const PostContainer = styled.div`
   }
   ul {
     list-style-type: circle;
+  }
+  code {
+    font-size: 18px;
+    line-height: 28px;
+    @media (min-width: ${breakpoints.lg}) {
+      font-size: 21px;
+      line-height: 32px;
+    }
   }
 `
 
@@ -80,6 +88,33 @@ const PostBody: React.FC<{ source: string }> = (props) => {
     return <p>{children}</p>
   }
 
+  const renderInlineCode = (props) => {
+    // Define your custom styles here
+    const customStyles = {
+      backgroundColor: '#eef1f2', // Change the background color
+      padding: '2px 4px', // Add padding
+      borderRadius: '4px', // Add rounded corners
+      fontFamily: 'monospace', // Use a monospace font
+      // Add any other styles you want
+    }
+
+    return <code style={customStyles}>{props.children}</code>
+  }
+
+  const renderLink = (props) => {
+    // Define your custom link styles here
+    const customStyles = {
+      textDecoration: 'underline', // Add underline to links
+      // Add any other styles you want
+    }
+
+    return (
+      <a style={customStyles} href={props.href} title={props.title}>
+        {props.children}
+      </a>
+    )
+  }
+
   return (
     <PostContainer>
       <ReactMarkdown
@@ -87,6 +122,8 @@ const PostBody: React.FC<{ source: string }> = (props) => {
         source={props.source}
         renderers={{
           code: Code,
+          inlineCode: renderInlineCode,
+          link: renderLink,
           paragraph: renderParagraph,
         }}
         escapeHtml={false}
